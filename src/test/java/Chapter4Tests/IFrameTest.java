@@ -46,7 +46,7 @@ public class IFrameTest {
                         "return (rect.top >= 0 && rect.bottom <= window.innerHeight);", MagnisText
         );
 
-        Assertions.assertFalse(isMagnisTextInitVisible, "Элемент, содержащий текст 'Magnis', изначально должен быть вне зоны видимости");
+        Assertions.assertFalse(isMagnisTextInitVisible, "Элемент, содержащий текст Magnis, изначально должен быть вне зоны видимости");
 
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
 
@@ -60,6 +60,6 @@ public class IFrameTest {
                         "return (rect.top >= 0 && rect.bottom <= window.innerHeight);", MagnisText
         );
 
-        Assertions.assertTrue(isMagnisTextVisible, "Ошибка: MagnisText должен быть видим после скролла");
+        Assertions.assertTrue(isMagnisTextVisible, "Элемент, содержащий текст Magnis, должен быть видим после скролла");
     }
 }

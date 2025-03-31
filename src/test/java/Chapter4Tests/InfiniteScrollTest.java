@@ -80,7 +80,7 @@ public class InfiniteScrollTest {
             List<WebElement> updatedLoremElements = driver.findElements(By.xpath("//b[text()='Lorem ipsum']"));
             int updatedCount = updatedLoremElements.size();
 
-            assertTrue(updatedCount > initialCount, "После скролла появился новый элемент, содержащий текст 'Lorem ipusm'");
+            assertTrue(updatedCount > initialCount, "После скролла должно было появитьсь больше новых элемента, содержащих текст 'Lorem ipusm'");
         }
     }
 }
