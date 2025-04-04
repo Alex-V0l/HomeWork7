@@ -10,7 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IFrameTest {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/iframes.html";
+    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    private static final String IFRAME_URL = "https://bonigarcia.dev/selenium-webdriver-java/iframes.html";
 
     @BeforeEach
     void setUp() {
