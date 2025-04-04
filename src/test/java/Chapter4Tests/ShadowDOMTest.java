@@ -25,21 +25,28 @@ public class ShadowDOMTest {
         driver.quit();
     }
 
-        @DisplayName("Проверка перехода на страницу с тестом")
+    @DisplayName("Проверка перехода на страницу Shadow DOM")
     @Tags({@Tag("Smoke"), @Tag("UI")})
     @Test
-    void getShadowDOM() {
-        WebElement ShadowDOMLink = driver.findElement(By.xpath("//a[@class='btn btn-outline-primary mb-2' and @href='shadow-dom.html']"));
-        ShadowDOMLink.click();
-        String actualURL = driver.getCurrentUrl();
-        Assertions.assertEquals(SHADOW_DOM_URL, actualURL, "Значения должны совпадать");
+    void getShadowDOM_URL() {
+            WebElement ShadowDOMLink = driver.findElement(By.xpath("//a[@class='btn btn-outline-primary mb-2' and @href='shadow-dom.html']"));
+            ShadowDOMLink.click();
+            WebElement ShadowDOMTitleText = driver.findElement(By.className("display-6"));
+            String actualURL = driver.getCurrentUrl();
 
-        WebElement ShadowDOMTitleText = driver.findElement(By.className("display-6"));
-        Assertions.assertEquals("Shadow DOM", ShadowDOMTitleText.getText(), "Значения должны совпадать");
+            Assertions.assertEquals(SHADOW_DOM_URL, actualURL, "Значения должны совпадать");
+            Assertions.assertEquals("Shadow DOM", ShadowDOMTitleText.getText(), "Значения должны совпадать");
+        }
 
+    @DisplayName("Проверка значения внутри Shadow DOM")
+    @Tags({@Tag("Smoke"), @Tag("UI")})
+    @Test
+    void getShadowDOMTest(){
+        driver.get(SHADOW_DOM_URL);
         WebElement content = driver.findElement(By.id("content"));
         SearchContext shadowRoot = content.getShadowRoot();
         WebElement ShadowDOMText = shadowRoot.findElement(By.cssSelector("p"));
+
         Assertions.assertEquals("Hello Shadow DOM", ShadowDOMText.getText(), "Значения должны совпадать");
     }
 }

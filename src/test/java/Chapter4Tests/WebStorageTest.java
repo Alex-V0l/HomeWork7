@@ -2,13 +2,11 @@ package Chapter4Tests;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-
 import java.time.Duration;
+import java.util.Map;
 
 public class WebStorageTest {
         WebDriver driver;
@@ -28,7 +26,7 @@ public class WebStorageTest {
         driver.quit();
     }
 
-    @DisplayName("Проверка перехода на страницу с тестом")
+    @DisplayName("Проверка перехода на страницу Web storage")
     @Tags({@Tag("Smoke"), @Tag("UI")})
     @Test
     void getWebStorageURL() {
@@ -41,30 +39,37 @@ public class WebStorageTest {
         Assertions.assertEquals("Web storage", WebStorageTitleText.getText(), "Значения должны совпадать");
     }
 
-    @DisplayName("Проверка Вэб Сторэдж")
+    @DisplayName("Проверка значений local storage")
     @Tags({@Tag("Smoke"), @Tag("UI")})
-    @Disabled //тест работает, но добиться появления нормальных значений не удалось. При выполнени теста видно только {}, а значения возвращаютсяс null
     @Test
-    void webStorageTest() {
+    void localStorageValueTest() {
         driver.get(WEB_STORAGE_URL);
 
         WebElement localStorageButton = driver.findElement(By.id("display-local"));
         localStorageButton.click();
+        WebElement localStorageText = driver.findElement(By.id("local-storage"));
+        String actualLocalStorageData = localStorageText.getText().trim();
+        UtilWebStorageTest expectedLocalStorageCollection = new UtilWebStorageTest();
+        Map<String, String> localStorageCollection = expectedLocalStorageCollection.getLocalStorage(driver);
+        String expectedLocalStorageData = expectedLocalStorageCollection.getFormattedStorage(localStorageCollection);
+
+        Assertions.assertEquals(expectedLocalStorageData, actualLocalStorageData, "Значения должны совпадать");
+    }
+
+    @DisplayName("Проверка значений session storage")
+    @Tags({@Tag("Smoke"), @Tag("UI")})
+    @Test
+    void sessionStorageValueTest() {
+        driver.get(WEB_STORAGE_URL);
+
         WebElement sessionStorageButton = driver.findElement(By.id("display-session"));
         sessionStorageButton.click();
+        WebElement sessionStorageText = driver.findElement(By.id("session-storage"));
+        String actualSessionStorageData = sessionStorageText.getText().trim();
+        UtilWebStorageTest expectedSessionStorageCollection = new UtilWebStorageTest();
+        Map<String, String> sessionStorageCollection = expectedSessionStorageCollection.getSessionStorage(driver);
+        String expectedSessionStorageData = expectedSessionStorageCollection.getFormattedStorage(sessionStorageCollection);
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement localStorageText = driver.findElement(By.id("local-storage"));
-        WebElement sessionStorageText =driver.findElement(By.id("session-storage"));
-
-        String visibleLocalStorageText = localStorageText.getDomAttribute("innerHTML");
-        String localInfoFromStorage = (String) js.executeScript("return window.localStorage.getItem('GDPR_REMOVAL_FLAG');");
-        String visibleSessionStorageText = sessionStorageText.getDomAttribute("innerHTML");
-        String sessionInfoFromStorage = (String) js.executeScript("return window.sessionStorage.getItem('user');");
-
-        System.out.println(visibleLocalStorageText + ", " + localInfoFromStorage + ", " + visibleSessionStorageText + ", " + sessionInfoFromStorage);
-
-        Assertions.assertEquals(visibleLocalStorageText, localInfoFromStorage, "Значения должны совпадать");
-        Assertions.assertEquals(visibleSessionStorageText, sessionInfoFromStorage, "Значения должны совпадать");
+        Assertions.assertEquals(expectedSessionStorageData, actualSessionStorageData, "Значения должны совпадать");
     }
 }

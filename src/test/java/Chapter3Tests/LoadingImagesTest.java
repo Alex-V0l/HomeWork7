@@ -9,13 +9,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
 import java.time.Duration;
 import java.util.List;
 
 public class LoadingImagesTest {
         WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/loading-images.html";
+        private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+        private static final String LOADING_IMAGES_URL = "https://bonigarcia.dev/selenium-webdriver-java/loading-images.html";
 
     @BeforeEach
     void setUp() {
@@ -29,15 +29,28 @@ public class LoadingImagesTest {
         driver.quit();
     }
 
+    @DisplayName("Проверка перехода на страницу loading images")
+    @Tags({@Tag("Smoke"), @Tag("UI")})
+    @Test
+    void getLoadingImagesURL(){
+        WebElement loadingImagesLink = driver.findElement(By.xpath("//a[@class='btn btn-outline-primary mb-2' and @href='loading-images.html']"));
+        loadingImagesLink.click();
+        String actualURL = driver.getCurrentUrl();
+        WebElement loadingImagesText = driver.findElement(By.className("display-6"));
+
+        Assertions.assertEquals("Loading images", loadingImagesText.getText(), "Значения должны совпадать");
+        Assertions.assertEquals(LOADING_IMAGES_URL, actualURL, "Значения должны совпадать");
+    }
+
     @DisplayName("Проверка количества загружаемых картинок")
     @Tags({@Tag("Smoke"), @Tag("UI")})
     @Test
     void loadingImagesAmountTest() {
+        driver.get(LOADING_IMAGES_URL);
         List<WebElement> imagesAtTheBeginning = driver.findElements(By.xpath("//div[@id='image-container']/img"));
         int initAmountOfImages = imagesAtTheBeginning.size();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@id='image-container']/img"), 4));
-
         List<WebElement> imagesInTheEnd = driver.findElements(By.xpath("//div[@id='image-container']/img"));
         int actualAmountOfImages = imagesInTheEnd.size();
 
@@ -53,15 +66,15 @@ public class LoadingImagesTest {
             "award, 2",
             "landscape, 3"
     })
-    void loadingImagesTest(String imageId, int expectedIndex) {
+    void loadingImagesValueTest(String imageId, int expectedIndex) {
+        driver.get(LOADING_IMAGES_URL);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//div[@id='image-container']/img"), 4));
         List<WebElement> images = driver.findElements(By.xpath("//div[@id='image-container']/img"));
-
         WebElement expectedImage = driver.findElement(By.id(imageId));
         String expectedAlt = expectedImage.getDomAttribute("alt");
-
         String actualAlt = images.get(expectedIndex).getDomAttribute("alt");
+
         Assertions.assertEquals(expectedAlt, actualAlt, "Значения должны совпадать");
     }
 }
