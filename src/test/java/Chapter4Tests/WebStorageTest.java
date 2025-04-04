@@ -1,5 +1,7 @@
 package Chapter4Tests;
 
+import Configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,15 +10,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 import java.util.Map;
 
+import static Constants.Constants.BASE_URL;
+
 public class WebStorageTest {
         WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
     private static final String WEB_STORAGE_URL = BASE_URL + "web-storage.html";
 
     @BeforeEach
     void setUp() {
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(config.getBaseURl());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
     }

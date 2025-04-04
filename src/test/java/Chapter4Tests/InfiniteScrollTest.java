@@ -1,5 +1,7 @@
 package Chapter4Tests;
 
+import Configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,18 +9,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
+
+import static Constants.Constants.BASE_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InfiniteScrollTest {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
-    private static final String INFINITE_SCROLL_URL = "https://bonigarcia.dev/selenium-webdriver-java/infinite-scroll.html";
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    private static final String INFINITE_SCROLL_URL = BASE_URL + "infinite-scroll.html";
 
     @BeforeEach
     void setUp() {
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(config.getBaseURl());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
     }

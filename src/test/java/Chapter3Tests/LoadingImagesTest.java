@@ -1,5 +1,7 @@
 package Chapter3Tests;
 
+import Configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,15 +14,17 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.time.Duration;
 import java.util.List;
 
+import static Constants.Constants.BASE_URL;
+
 public class LoadingImagesTest {
         WebDriver driver;
-        private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
-        private static final String LOADING_IMAGES_URL = "https://bonigarcia.dev/selenium-webdriver-java/loading-images.html";
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    private static final String LOADING_IMAGES_URL = BASE_URL + "loading-images.html";
 
     @BeforeEach
     void setUp() {
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(config.getBaseURl());
         driver.manage().window().maximize();
     }
 

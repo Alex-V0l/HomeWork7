@@ -1,5 +1,7 @@
 package Chapter4Tests;
 
+import Configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,16 +9,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import static Constants.Constants.BASE_URL;
+
 public class LongPageTest {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
     private static final String LONG_PAGE_URL = BASE_URL + "long-page.html";
     private static final String FOOTER = "footer";
 
     @BeforeEach
     void setUp() {
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(config.getBaseURl());
         driver.manage().window().maximize();
     }
 

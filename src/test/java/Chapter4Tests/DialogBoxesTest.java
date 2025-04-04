@@ -1,5 +1,7 @@
 package Chapter4Tests;
 
+import Configs.TestPropertiesConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -10,19 +12,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
+import static Constants.Constants.BASE_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class DialogBoxesTest {
     WebDriver driver;
-    private static final String BASE_URL = "https://bonigarcia.dev/selenium-webdriver-java/";
-    private static final String DIALOG_BOXES_URL = "https://bonigarcia.dev/selenium-webdriver-java/dialog-boxes.html";
+    TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
+    private static final String DIALOG_BOXES_URL = BASE_URL + "dialog-boxes.html";
 
     @BeforeEach
     void setUp() {
         driver = new ChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(config.getBaseURl());
         driver.manage().window().maximize();
     }
 
