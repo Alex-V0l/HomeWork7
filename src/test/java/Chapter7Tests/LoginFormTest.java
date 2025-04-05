@@ -14,7 +14,7 @@ import static Constants.Constants.BASE_URL;
 public class LoginFormTest {
     WebDriver driver;
     TestPropertiesConfig config = ConfigFactory.create(TestPropertiesConfig.class, System.getProperties());
-    private static final String LOGIN_FORM_URL = BASE_URL + "cookies.html";
+    private static final String LOGIN_FORM_URL = BASE_URL + "login-form.html";
 
     @BeforeEach
     void setUp() {
@@ -52,8 +52,6 @@ public class LoginFormTest {
         passwordForm.sendKeys(config.getPassword());
         WebElement submitButton = driver.findElement(By.xpath("//button[@type = 'submit']"));
         submitButton.click();
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
         WebElement message = driver.findElement(By.id("success"));
 
         Assertions.assertEquals("Login successful", message.getText(), "Значения должны совпадать");
