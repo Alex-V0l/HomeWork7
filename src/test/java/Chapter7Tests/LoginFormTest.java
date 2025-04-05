@@ -52,7 +52,7 @@ public class LoginFormTest {
         passwordForm.sendKeys(config.getPassword());
         WebElement submitButton = driver.findElement(By.xpath("//button[@type = 'submit']"));
         submitButton.click();
-        WebElement message = driver.findElement(By.id("success"));
+        WebElement message = driver.findElement(By.className("alert"));
 
         Assertions.assertEquals("Login successful", message.getText(), "Значения должны совпадать");
     }
