@@ -185,8 +185,7 @@ public class DialogBoxesTest {
         WebElement ModalButton = driver.findElement(By.id("my-modal"));
         ModalButton.click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.and(presenceOfElementLocated(By.className("modal-content")),
-                (presenceOfElementLocated(By.xpath("//button[@class='btn btn-primary model-button']")))));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn btn-primary model-button']")));
         WebElement saveChangesButton = driver.findElement(By.xpath("//button[@class='btn btn-primary model-button']"));
         saveChangesButton.click();
         WebElement saveChangesText = driver.findElement(By.id("modal-text"));
