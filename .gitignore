@@ -45,4 +45,5 @@ bin/
 ### Properties ###
 # Игнорируем все .properties файлы в ресурсах
 src/test/resources/default.properties
+src/test/resources/prod.properties
 
