@@ -94,7 +94,6 @@ public class SlowCalculatorTest {
 
     @DisplayName("Изменение ожидания расчета")
     @Tags({@Tag("Smoke"), @Tag("UI")})
-    @Disabled//значение ожидания не меняется, хотя кнопками его можно поменять. Значение value в элементе при этом не меняется.
     @Test
     void changeDelayTest(){
         String newDelayValue = "3";
@@ -105,8 +104,8 @@ public class SlowCalculatorTest {
         DelayField.clear();
         DelayField.sendKeys(newDelayValue);
         WebDriverWait firstWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        firstWait.until(ExpectedConditions.domAttributeToBe(DelayField, "value", newDelayValue));
-        String actualDelayValue = DelayField.getDomAttribute("value");
+        firstWait.until(ExpectedConditions.domPropertyToBe(DelayField, "value", newDelayValue));
+        String actualDelayValue = DelayField.getDomProperty("value");
         performCalculator(1, '+', 2);
         WebElement resultOnScreen = driver.findElement(By.className("screen"));
         WebDriverWait secondWait = new WebDriverWait(driver, Duration.ofSeconds(6));

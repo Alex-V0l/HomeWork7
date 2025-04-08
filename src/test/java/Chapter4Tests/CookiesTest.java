@@ -107,8 +107,8 @@ public class CookiesTest {
 
             options.deleteCookieNamed("age");
             CookiesButton.click();
-            int anotherCoockiesSize = options.getCookies().size();
-            Assertions.assertEquals(initCookiesAmount, anotherCoockiesSize, "После удаления, количество cookies должно быть равным изначальному");
+            int anotherCookiesSize = options.getCookies().size();
+            Assertions.assertEquals(initCookiesAmount, anotherCookiesSize, "После удаления, количество cookies должно быть равным изначальному");
     }
 }
 
