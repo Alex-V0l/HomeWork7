@@ -1,5 +1,6 @@
 package POM;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,22 +16,27 @@ public class BasePage {
         this.driver = driver;
     }
 
+    @Step("getting current URL")
     public String getCurrentURL (){
         return driver.getCurrentUrl();
     }
 
+    @Step ("get subtitle")
     public String getSubtitleText(){
         return driver.findElement(SubTitle).getText();
     }
 
+    @Step("return to homepage")
     public void returnToIndex(){
         driver.findElement(returnToIndexLinkLocator).click();
     }
 
+    @Step("get text of copyright part")
     public String getCopyrightText(){
         return driver.findElement(copyrightTextLocator).getText();
     }
 
+    @Step("click to link, that leads to bonigarcia")
     public void getDevelopersPageLink(){
         WebElement devpglink = driver.findElement(developersPageLinkLocator);
         JavascriptExecutor js = (JavascriptExecutor) driver;

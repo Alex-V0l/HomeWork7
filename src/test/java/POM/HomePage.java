@@ -1,4 +1,5 @@
 package POM;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,18 +17,22 @@ public class HomePage extends BasePage{
         super(driver);
     }
 
+    @Step("open homepage")
     public void open() {
         driver.get(BASE_URL);
     }
 
+    @Step("get main title")
     public String getTitle() {
         return driver.getTitle();
     }
 
+    @Step("get collection of all chapters on homepage")
     public List<WebElement> findChapters() {
         return driver.findElements(chapterTitle);
     }
 
+    @Step("get collection of all links of new pages on home page and click on them")
     public int getQuantityOfLinks(int quantityOfLinks, List<WebElement> findChapters) {
         for (WebElement chapter : findChapters) {
             List<WebElement> links = chapter.findElements(By.xpath("./../a"));
@@ -40,11 +45,13 @@ public class HomePage extends BasePage{
         return quantityOfLinks;
     }
 
+    @Step("click to link that leads to web form page")
     public WebFormPage openWebFormPage() {
         driver.findElement(WebFormLinkLocator).click();
         return new WebFormPage(driver);
     }
 
+    @Step("click to link that leads to navigation page")
     public NavigationPage openNavigationPage() {
         driver.findElement(NavigationLinkLocator).click();
         return new NavigationPage(driver);

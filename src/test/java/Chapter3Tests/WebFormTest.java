@@ -357,8 +357,7 @@ public class WebFormTest extends BaseTest {
 
         webFormPage.clickSubmitButton();
         Thread.sleep(3000);
-        String url = webFormPage.getCurrentURL();
-        System.out.println(url);
+
         boolean isContains = webFormPage.isContainsFileNameInURL(fileName);
 
         Assertions.assertTrue(isContains, "Названия файла нет в URL!");
