@@ -1,6 +1,6 @@
-package POM;
+package POMPages;
 
-import Chapter3Tests.WebFormTest;
+import POMTests.WebFormTest;
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -12,10 +12,11 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static Constants.Constants.WEB_FORM_URL;
-
+import static Constants.Constants.BASE_URL;
 
 public class WebFormPage extends BasePage {
+
+    public static final String WEB_FORM_URL = BASE_URL + "web-form.html";
 
     By textInputText = By.xpath("//label[@class='form-label w-100' and normalize-space(text())='Text input']");
     By textForm = By.id("my-text-id");

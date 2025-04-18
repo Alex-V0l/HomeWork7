@@ -1,13 +1,15 @@
-package HomePageTest;
+package POMTests;
 
-import POM.BaseTest;
-import POM.HomePage;
+import POMPages.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
 import static Constants.Constants.BASE_URL;
+import static FactoryPOMPages.NavigationPageFactory.NAVIGATION_URL;
+import static POMPages.WebFormPage.WEB_FORM_URL;
+
 
 public class HomePageTest extends BaseTest {
 
@@ -40,5 +42,38 @@ public class HomePageTest extends BaseTest {
 
         Assertions.assertEquals(expectedQuantityOfChapters, actualQuantityOfChapters, "Значения должны совпадать");
         Assertions.assertEquals(expectedQuantityOfLinks, actualQuantityOfLinks, "Значения должны совпадать");
+    }
+
+    @DisplayName("Проверка перехода на web form и его подзаголовка")
+    @Tags({@Tag("Smoke"), @Tag("UI")})
+    @Test
+    void webFormURLAndSubTitleTest() {
+        String expectedSubtitle = "Web form";
+
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+        WebFormPage webFormPage = homePage.openWebFormPage();
+        String actualURL = webFormPage.getCurrentURL();
+        String actualSubtitle = webFormPage.getSubtitleText();
+
+        Assertions.assertEquals(expectedSubtitle, actualSubtitle, "Значения должны совпадать");
+        Assertions.assertEquals(WEB_FORM_URL, actualURL, "Значения должны совпадать");
+    }
+
+    @DisplayName("Проверка перехода на navigation и его подзаголовка")
+    @Tags({@Tag("Smoke"), @Tag("UI")})
+    @Test
+    void navigationURLAndSubtitleTest() {
+        String expectedSubtitle = "Navigation example";
+
+        HomePage homePage = new HomePage(driver);
+        homePage.open();
+        NavigationPage navigationPage = homePage.openNavigationPage();
+
+        String actualURL = navigationPage.getCurrentURL();
+        String actualSubtitle = navigationPage.getSubtitleText();
+
+        Assertions.assertEquals(expectedSubtitle, actualSubtitle, "Значения должны совпадать");
+        Assertions.assertEquals(NAVIGATION_URL, actualURL, "Значения должны совпадать");
     }
 }

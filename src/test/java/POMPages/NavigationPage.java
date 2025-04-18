@@ -1,14 +1,16 @@
-package POM;
+package POMPages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static Constants.Constants.NAVIGATION_URL;
+import static Constants.Constants.BASE_URL;
 
 
 public class NavigationPage extends BasePage{
+
+    public static final String NAVIGATION_URL = BASE_URL + "navigation1.html";
 
     By ParagraphTextLocator = By.className("lead");
     By previousButtonFirstPageLocator = By.xpath("//li[@class='page-item disabled']/a");

@@ -1,31 +1,12 @@
-package Chapter3Tests;
+package POMTests;
 
-import POM.BaseTest;
-import POM.HomePage;
-import POM.NavigationPage;
-import POM.WebFormPage;
+import POMPages.NavigationPage;
 import org.junit.jupiter.api.*;
 
-import static Constants.Constants.NAVIGATION_URL;
 
 public class NavigationTest extends BaseTest {
 
-    @DisplayName("Проверка поиска подзаголовка основной страницы")
-    @Tags({@Tag("Smoke"), @Tag("UI")})
-    @Test
-    void findTitleTest() {
-        String expectedSubtitle = "Navigation example";
 
-        HomePage homePage = new HomePage(driver);
-        homePage.open();
-        NavigationPage navigationPage = homePage.openNavigationPage();
-
-        String actualURL = navigationPage.getCurrentURL();
-        String actualSubtitle = navigationPage.getSubtitleText();
-
-        Assertions.assertEquals(expectedSubtitle, actualSubtitle, "Значения должны совпадать");
-        Assertions.assertEquals(NAVIGATION_URL, actualURL, "Значения должны совпадать");
-    }
 
     @DisplayName("проверка значений направляющих кнопок в исходном состоянии")
     @Tags({@Tag("Smoke"), @Tag("UI")})

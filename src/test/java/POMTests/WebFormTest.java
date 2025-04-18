@@ -1,29 +1,10 @@
-package Chapter3Tests;
+package POMTests;
 
-import POM.HomePage;
-import POM.WebFormPage;
+import POMPages.WebFormPage;
 import org.junit.jupiter.api.*;
-import POM.BaseTest;
 
-import static Constants.Constants.WEB_FORM_URL;
 
 public class WebFormTest extends BaseTest {
-
-    @DisplayName("Проверка перехода на страницу и поиска подзаголовка")
-    @Tags({@Tag("Smoke"), @Tag("UI")})
-    @Test
-    void webFormURLAndSubTitleTest() {
-        String expectedSubtitle = "Web form";
-
-        HomePage homePage = new HomePage(driver);
-        homePage.open();
-        WebFormPage webFormPage = homePage.openWebFormPage();
-        String actualURL = webFormPage.getCurrentURL();
-        String actualSubtitle = webFormPage.getSubtitleText();
-
-        Assertions.assertEquals(expectedSubtitle, actualSubtitle, "Значения должны совпадать");
-        Assertions.assertEquals(WEB_FORM_URL, actualURL, "Значения должны совпадать");
-    }
 
     @DisplayName("Проверка формы text input")
     @Tags({@Tag("Smoke"), @Tag("UI")})
