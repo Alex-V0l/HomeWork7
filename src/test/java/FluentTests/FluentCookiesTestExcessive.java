@@ -1,17 +1,17 @@
 package FluentTests;
 
-import FluentPages.FluentCookiesPage;
+import FluentPages.FluentCookiesPageExcessive;
 import org.junit.jupiter.api.*;
 
 
-public class FluentCookiesTest extends FluentBaseTest {
+public class FluentCookiesTestExcessive extends FluentBaseTest {
 
-    private FluentCookiesPage fluentCookiesPage;
+    private FluentCookiesPageExcessive fluentCookiesPageExcessive;
 
     @BeforeEach
     void setUpNavigationPage() {
-        fluentCookiesPage = new FluentCookiesPage(driver);
-        fluentCookiesPage.open();
+        fluentCookiesPageExcessive = new FluentCookiesPageExcessive(driver);
+        fluentCookiesPageExcessive.open();
     }
 
     @DisplayName("Проверка значений Cookies")
@@ -22,10 +22,15 @@ public class FluentCookiesTest extends FluentBaseTest {
         String firstCookieName = "username";
         String secondCookieName = "date";
 
-        fluentCookiesPage
+        fluentCookiesPageExcessive
                 .getAmountOfCookies()
                 .checkEqualityAmountOfCookies(expectedAmountOfCookies)
+                .getValueOfCookieByName(firstCookieName)
+                .getValueOfCookieByName(secondCookieName)
                 .clickCookiesButton()
+                .getArrayOfCookies()
+                .getFirstCookieValue()
+                .getSecondCookieValue()
                 .checkCookiesFirstName(firstCookieName)
                 .checkCookiesSecondName(secondCookieName);
     }
@@ -38,15 +43,19 @@ public class FluentCookiesTest extends FluentBaseTest {
         String newCookieName = "age";
         String newCookieValue = "21";
 
-        fluentCookiesPage
+        fluentCookiesPageExcessive
                 .getAmountOfCookies()
                 .checkEqualityAmountOfCookies(initCookiesAmount)
                 .createNewCookie(newCookieName, newCookieValue)
+                .getNameOfCreatedCookie(newCookieName, newCookieValue)
+                .getValueOfCreatedCookie(newCookieName, newCookieValue)
                 .checkCookiesNames(newCookieName, newCookieValue)
                 .checkCookiesValues(newCookieName, newCookieValue)
                 .clickCookiesButton()
+                .getAmountOfCookies()
                 .checkCookiesAmountIncreased(initCookiesAmount)
                 .deleteCreatedCookie(newCookieName)
+                .getAmountOfCookies()
                 .checkEqualityAmountOfCookies(initCookiesAmount);
     }
 }
